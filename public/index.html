@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Customizer</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <main>
+        <!-- Loading Animation -->
+        <div class="loader active">
+            <h1>Loading...</h1>
+        </div>
+        <!-- Result Field -->
+        <div class="resultContainer"></div>
+        <!-- Error PopUp Box -->
+        <div class="errorPopupBox"></div>
+        <div class="side-content">
+            <h1>Welcome To Image</h1>
+            <h2 id="typingAnimatedText"></h2>
+        </div>
+        <!-- main content field -->
+        <div class="main-content">
+            <input type="file" name="Image" id="image" accept="image/*"  />
+            <label for="image"><span class="material-symbols-outlined">add_a_photo</span>Upload an Image</label>
+            <div class="operation-selector">
+                <div class="selector">
+                    <input type="text" id="option-selector" placeholder="Select an Option"  /><img
+                        src="./images/down.png" alt="drop-down-arrow" />
+                </div>
+                <div class="options">
+                    <div class="option" id="resize">Resize</div>
+                    <div class="option" id="crop">Crop</div>
+                    <div class="option" id="rotate">Rotate</div>
+                </div>
+            </div>
+            <div class="defaultSelectors">
+                <div class="defaultSelector">
+                    <input type="checkbox" name="greyscale" id="greyscale"/>
+                    <label for="greyscale">Greyscale</label>
+                </div>
+                <div class="defaultSelector inputDesign">
+                    <input type="number" name="blur" id="blur" min="0"/>
+                    <label>BLUR</label>
+                </div>
+            </div>
+            <!-- resize -->
+            <div class="resize operation-field active">
+                <div class="inputDesign">
+                    <input type="number" name="width"/>
+                    <label>WIDTH</label>
+                </div>
+                <div class="inputDesign"  id="height" style="display: none;">
+                    <input type="number" name="height"/>
+                    <label>HEIGHT</label>
+                </div>
+                <div class="checkBoxInput">
+                    <input type="checkbox" id="compression" checked/>
+                    <label for="compression">Compression</label>
+                </div>
+                <div class="checkBoxInput">
+                    <input type="checkbox" id="aspect-ratio" checked/>
+                    <label for="aspect-ratio">Aspect Ratio</label>
+                </div>
+                <button type="submit" class="buttonResize"><span class="material-symbols-outlined">resize</span>RESIZE</button>
+            </div>
+            <!-- crop -->
+            <div class="crop operation-field active">
+                <div class="inputDesign">
+                    <input type="number" name="width"/>
+                    <label>WIDTH</label>
+                </div>
+                <div class="inputDesign">
+                    <input type="number" name="height"/>
+                    <label>HEIGHT</label>
+                </div>
+                <div class="inputDesign">
+                    <input type="number"/>
+                    <label>LEFT</label>
+                </div>
+                <div class="inputDesign">
+                    <input type="number"/>
+                    <label>TOP</label>
+                </div>
+                <button type="submit" class="buttonCrop"><span class="material-symbols-outlined">transform</span>CROP</button>
+            </div>
+            <!-- rotate -->
+            <div class="rotate operation-field active">
+                <div class="inputDesign">
+                    <input type="number"/>
+                    <label>ANGLE</label>
+                </div>
+                <div class="colorInput">
+                    <input type="color" name="color" id="color" value="#ffffff"/>
+                    <label for="color">Background Color</label>
+                </div>
+                <button type="submit" class="buttonRotate"><span class="material-symbols-outlined">rotate_right</span>ROTATE</button>
+            </div>
+        </div>
+    </main>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./client.js"></script>
+</body>
+
+</html>

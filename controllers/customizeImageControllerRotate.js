@@ -1,9 +1,9 @@
 const sharp = require('sharp');
-const path = require('path');
+const path = require('node:path');
 const {StatusCodes} = require('http-status-codes');
 const {BadRequestError} = require('../errors');
 const cloudinary = require('cloudinary').v2;
-const {unlinkSync} = require('fs');
+const {unlink} = require('node:fs');
 
 const rotateImage = async (req, res)=>{
     const {angle:rotateAngle, backgroundcolor:backgroundColor, greyScale, blur} = req.body;
@@ -21,13 +21,21 @@ const rotateImage = async (req, res)=>{
 
     await rotatedData.toFile(rotatedPath);
 
-    const {secure_url, bytes:resizedImageSize} = await cloudinary.uploader.upload(rotatedPath,{folder:'image_customiser_project'});
+    const {secure_url, bytes:rotatedImageSize} = await cloudinary.uploader.upload(rotatedPath,{folder:'image_customiser_project'});
 
-    unlinkSync(uploadedPath);
-    unlinkSync(rotatedPath);
+    unlink(uploadedPath, (err)=>{
+        if(err){
+            console.log('Opps!  Something Went Wrong.');
+        }
+    });
+    unlink(rotatedPath, (err)=>{
+        if(err){
+            console.log('Opps!  Something Went Wrong.');
+        }
+    });
 
     res.status(StatusCodes.ACCEPTED).json({
-        size:resizedImageSize,src:`${secure_url}`
+        size:rotatedImageSize,src:`${secure_url}`
     })
 }
 

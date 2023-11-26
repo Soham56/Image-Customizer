@@ -1,9 +1,9 @@
 const sharp = require('sharp');
-const path = require('path');
+const path = require('node:path');
 const {StatusCodes} = require('http-status-codes');
 const {BadRequestError} = require('../errors');
 const cloudinary = require('cloudinary').v2;
-const {unlinkSync} = require('fs');
+const {unlink} = require('node:fs');
 
 const resizeImage = async (req, res)=>{
     let {width:imageWidth, height:imageHeight, aspectratio:aspectRatio, compression, greyScale, blur} = req.body;
@@ -18,6 +18,9 @@ const resizeImage = async (req, res)=>{
         resizedData = resizedData.resize({width:Number(imageWidth)});
     }
     else{
+        if(!imageHeight){
+            throw new BadRequestError('Height must provied !')
+        }
         resizedData = resizedData.resize({width:Number(imageWidth),height:Number(imageHeight)});
     }
     
@@ -32,8 +35,16 @@ const resizeImage = async (req, res)=>{
 
     const {secure_url, bytes:resizedImageSize} = await cloudinary.uploader.upload(resizedPath,{folder:'image_customiser_project'});
     
-    unlinkSync(uploadedPath);
-    unlinkSync(resizedPath);
+    unlink(uploadedPath, (err)=>{
+        if(err){
+            console.log('Opps!  Something Went Wrong.');
+        }
+    });
+    unlink(resizedPath, (err)=>{
+        if(err){
+            console.log('Opps!  Something Went Wrong.');
+        }
+    });
 
     res.status(StatusCodes.ACCEPTED).json({
         size:resizedImageSize,src:`${secure_url}`

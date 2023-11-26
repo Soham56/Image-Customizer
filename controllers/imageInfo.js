@@ -1,8 +1,8 @@
 const sharp = require('sharp');
-const path = require('path');
+const path = require('node:path');
 const {StatusCodes} = require('http-status-codes');
 const {BadRequestError} = require('../errors');
-const {unlinkSync} = require('fs');
+const {unlink} = require('node:fs');
 
 const imageInfo = async (req, res)=>{
     if(!req.files || !req.files.image) throw new BadRequestError('Please provide an image file !');
@@ -10,7 +10,11 @@ const imageInfo = async (req, res)=>{
     const uploadedPath = uploadedImage.tempFilePath;
 
     const {width, height} = await sharp(uploadedPath).metadata();
-    unlinkSync(uploadedPath);
+    unlink(uploadedPath, (err)=>{
+        if(err){
+            console.log('Opps!  Something Went Wrong.');
+        }
+    });
 
     return res.status(StatusCodes.ACCEPTED).json({width,height});
 }

@@ -434,7 +434,6 @@ button[type='submit']:hover{
 
 
 .childResult{
-    width: 48%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -443,6 +442,15 @@ button[type='submit']:hover{
     padding: 1rem;
     color: #fff;
 }
+
+.childResult:nth-child(1){
+    width: 60%;
+}
+
+.childResult:nth-child(2){
+    width: 35%;
+}
+
 .childResult img{
     width: 100%;
     height: 100%;
@@ -458,4 +466,40 @@ button[type='submit']:hover{
     border-radius: 10px;
     margin: 10px;
     color: aliceblue;
+    box-shadow: 0 0 10px #023e8a;
+    transition: .5s;
+}
+
+.childResult a:hover{
+    box-shadow: none;
+}
+
+@media screen and (max-width: 500px) {
+    body{
+        overflow: hidden;
+    }
+    main{
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .side-content{
+        width: 90%;
+        height: 30%;
+        margin: auto;
+    }
+    .side-content h1{
+        font-size: 2rem;
+    }
+    .side-content h2, .typed-cursor{
+        font-size: 1.5rem;
+    }
+    .main-content{
+        width: 95%;
+        height: 65%;
+        margin: auto;
+        border-top-right-radius: 20%;
+        border-top-left-radius: 20%;
+        overflow-y: auto;
+        padding-bottom: 1rem;
+    }
 }

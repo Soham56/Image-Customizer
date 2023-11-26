@@ -1,9 +1,9 @@
 const sharp = require('sharp');
-const path = require('node:path');
+const path = require('path');
 const {StatusCodes} = require('http-status-codes');
 const {BadRequestError} = require('../errors');
 const cloudinary = require('cloudinary').v2;
-const {unlink} = require('node:fs');
+const {unlink} = require('fs');
 
 const rotateImage = async (req, res)=>{
     const {angle:rotateAngle, backgroundcolor:backgroundColor, greyScale, blur} = req.body;

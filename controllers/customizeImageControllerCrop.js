@@ -1,9 +1,9 @@
 const sharp = require('sharp');
-const path = require('node:path');
+const path = require('path');
 const { StatusCodes } = require('http-status-codes');
 const { BadRequestError } = require('../errors');
 const cloudinary = require('cloudinary').v2;
-const { unlink } = require('node:fs');
+const { unlink } = require('fs');
 
 const cropImage = async (req, res) => {
     const { width, height, left, top, greyScale, blur } = req.body;

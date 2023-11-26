@@ -1,8 +1,8 @@
 const sharp = require('sharp');
-const path = require('node:path');
+const path = require('path');
 const {StatusCodes} = require('http-status-codes');
 const {BadRequestError} = require('../errors');
-const {unlink} = require('node:fs');
+const {unlink} = require('fs');
 
 const imageInfo = async (req, res)=>{
     if(!req.files || !req.files.image) throw new BadRequestError('Please provide an image file !');

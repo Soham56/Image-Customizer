@@ -388,9 +388,12 @@ button[type='submit']:hover{
     top: 5%;
     right: -100%;
     z-index: 25;
+
+    display: none;
 }
 
 .errorPopupBox.active{
+    display: block;
     right: 5%;
 }
 
@@ -443,11 +446,10 @@ button[type='submit']:hover{
     color: #fff;
 }
 
-.childResult:nth-child(1){
+.childResult:nth-child(2){
     width: 60%;
 }
-
-.childResult:nth-child(2){
+.childResult:nth-child(3){
     width: 35%;
 }
 
@@ -501,5 +503,27 @@ button[type='submit']:hover{
         border-top-left-radius: 20%;
         overflow-y: auto;
         padding-bottom: 1rem;
+    }
+    .loader h1{
+        font-size: 2rem;
+    }
+
+    .resultContainer{
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .childResult:nth-child(2), .childResult:nth-child(3){
+        width: 90%;
+        height: 80%;
+    }
+    .childResult:nth-child(3){
+        height: 18%;
+        flex-direction: row;
+    }
+
+    .defaultSelector{
+        margin-top: 1rem;
     }
 }

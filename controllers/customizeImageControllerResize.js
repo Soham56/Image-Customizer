@@ -9,6 +9,15 @@ const resizeImage = async (req, res)=>{
     let {width:imageWidth, height:imageHeight, aspectratio:aspectRatio, compression, greyScale, blur} = req.body;
     if(!req.files || !req.files.image) throw new BadRequestError('Please provide an image file !');
 
+    if(imageWidth<0) {
+        unlink(uploadedPath, (err)=>{if(err){console.log('Opps!  Something Went Wrong.')}});
+        throw new BadRequestError('Width must be positive !');
+    }
+    if(imageHeight && imageHeight<0) {
+        unlink(uploadedPath, (err)=>{if(err){console.log('Opps!  Something Went Wrong.')}});
+        throw new BadRequestError('Height must be positive');
+    }
+
     const uploadedImage = req.files.image;
     const uploadedPath = req.files.image.tempFilePath;
     const resizedPath = path.resolve(uploadedPath,`../resized-${path.basename(uploadedPath)}`);
